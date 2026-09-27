@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rate your visit — ReviewKaro by KnownLabs</title>
+<meta name="description" content="Tap, copy, done — your review in 30 seconds. AI-powered.">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="icon" type="image/png" href="assets/img/favicon.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="rv-page">
+
+<main class="rv-card">
+
+  <div id="st-loading" class="rv-err">
+    <div style="font-size:40px;margin-bottom:12px">⏳</div>
+    <p>Loading…</p>
+  </div>
+
+  <div id="st-error" class="rv-err hidden">
+    <div style="font-size:44px;margin-bottom:12px">🔗</div>
+    <h2>This QR code doesn't look right</h2>
+    <p>Please ask the shop for their latest QR code.</p>
+  </div>
+
+  <div id="st-paused" class="rv-err hidden">
+    <div class="paused-box">
+      <div class="big">⏸️</div>
+      <h2>Service paused</h2>
+      <p><b id="pausedBiz">This business</b> is not accepting reviews right now.<br>Please contact the owner.</p>
+    </div>
+  </div>
+
+  <!-- step 1 : like / dislike -->
+  <div id="st-choice" class="hidden">
+    <div class="rv-biz">
+      <div class="mark" id="bizMark">★</div>
+      <h1 id="bizName">Business</h1>
+      <p>How was your experience?</p>
+    </div>
+    <div class="step-dots"><i class="on"></i><i></i></div>
+    <div class="choice-row">
+      <button class="choice like" id="btnLike">
+        <span class="t">Loved it!</span>
+        <span class="s">I had a great experience</span>
+      </button>
+      <button class="choice dislike" id="btnDislike">
+        <span class="t">Not great</span>
+        <span class="s">I have a complaint</span>
+      </button>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:13px;margin-top:18px">Takes 30 seconds — no typing needed</p>
+  </div>
+
+  <!-- step 2a : AI review -->
+  <div id="st-review" class="hidden">
+    <div class="rv-biz">
+      <div class="mark" id="bizMark2">★</div>
+      <h1 id="bizName2">Business</h1>
+    </div>
+    <div class="step-dots"><i></i><i class="on"></i></div>
+
+    <div id="genLoading">
+      <div style="text-align:center;margin:26px 0 14px;font-size:15px;font-weight:600">Writing your review ✨</div>
+      <div class="shimmer" style="height:18px;margin-bottom:10px"></div>
+      <div class="shimmer" style="height:18px;margin-bottom:10px"></div>
+      <div class="shimmer" style="height:18px;width:70%"></div>
+    </div>
+
+    <div id="genDone" class="hidden">
+      <div style="text-align:center"><span id="genBadge" class="ai-badge">✨ AI ne likha hai</span></div>
+      <div class="lang-toggle">
+        <button id="langEn" class="on">English</button>
+        <button id="langHi">Hinglish</button>
+      </div>
+      <div class="gen-card">
+        <div class="lbl">Your review — copy it and paste on Google</div>
+        <p class="review-text" id="reviewText"></p>
+        <div class="btnrow">
+          <button class="btn btn-dark btn-sm" id="btnCopy">📋 Copy review</button>
+          <button class="btn btn-ghost btn-sm" id="btnRegen">🔄 Write another</button>
+        </div>
+        <div class="btnrow" style="margin-top:10px">
+          <button class="btn btn-amber" id="btnGoogle" style="width:100%">⭐ Post on Google</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- step 2b : private feedback -->
+  <div id="st-feedback" class="hidden">
+    <div class="rv-biz">
+      <div class="mark" id="bizMark3">★</div>
+      <h1 id="bizName3">Business</h1>
+    </div>
+    <div class="rv-box" style="text-align:left">
+      <div style="text-align:center"><div class="rv-done-icon">💬</div></div>
+      <h2 style="text-align:center">What went wrong?</h2>
+      <p class="sub" style="text-align:center">Only the owner will see this — it won't be posted on Google.</p>
+      <textarea class="rv-text" id="fbText" placeholder="What could have been better?"></textarea>
+      <div class="rv-actions">
+        <button class="btn btn-dark" id="btnSendFeedback">Send feedback</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- done -->
+  <div id="st-done" class="rv-box hidden">
+    <div class="rv-done-icon" id="doneIcon">🙏</div>
+    <h2 id="doneTitle">Thank you!</h2>
+    <p class="sub" id="doneSub"></p>
+  </div>
+
+</main>
+
+<footer class="rv-foot">
+  Powered by <b>ReviewKaro</b> · a KnownLabs product
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/r.js"></script>
+</body>
+</html>
